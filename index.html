@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nyakabuye Ahead</title>
+<style>
+  body { font-family: Arial, sans-serif; background:#fafafa; color:#262626; margin:0; }
+  header { background:#1db954; color:white; padding:40px; text-align:center; }
+  h1 { margin:0; font-size:2.5rem; }
+  .btn { background:#0095f6; color:white; border:none; padding:10px 20px; margin:10px; cursor:pointer; border-radius:8px; font-weight:600; }
+  .btn:hover { background:#007ac1; }
+  input, textarea { width:100%; padding:10px; border:1px solid #dbdbdb; border-radius:8px; background:#fafafa; margin-top:5px; }
+  iframe { border-radius:10px; }
+  footer { background:#fff; border-top:1px solid #dbdbdb; padding:20px; text-align:center; margin-top:20px; }
+  footer a { color:#0095f6; font-weight:bold; text-decoration:none; margin:0 10px; }
+  footer a:hover { text-decoration:underline; }
+  .social-links { margin-top:10px; }
+  /* Visitor floating panel */
+  #visitorDashboard { display:none; position:fixed; top:15px; right:15px; background:#0095f6; color:#fff; padding:12px 18px; border-radius:12px; }
+  #visitorDashboard button { background:#fff; color:#0095f6; border:none; padding:6px 12px; margin-top:10px; cursor:pointer; border-radius:8px; font-weight:bold; }
+  /* Admin Dashboard */
+  #adminDashboard { display:none; max-width:700px; margin:30px auto; background:#fff; border:1px solid #dbdbdb; border-radius:12px; padding:20px; }
+  .tabs { display:flex; justify-content:space-around; border-bottom:1px solid #dbdbdb; margin-bottom:15px; }
+  .tabs button { flex:1; background:none; border:none; padding:10px; font-weight:600; cursor:pointer; color:#8e8e8e; }
+  .tabs button.active { color:#262626; border-bottom:2px solid #0095f6; }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
+  ul { list-style:none; padding:0; }
+  ul li { background:#fafafa; border:1px solid #dbdbdb; margin:5px 0; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; }
+  ul li button { background:#ed4956; color:white; border:none; padding:5px 10px; border-radius:6px; cursor:pointer; }
+  ul li button.block { background:#f39c12; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Nyakabuye Ahead</h1>
+  <p>Producer • Songwriter • Logo Designer • Tag Maker</p>
+</header>
+
+<!-- Public Website -->
+<div id="publicContent" style="text-align:center; padding:20px;">
+  <h2>Welcome Visitors!</h2>
+  <p id="welcomeText">Nyakabuye Ahead is a producer, songwriter, logo designer, and tag maker.</p>
+  
+  <iframe id="beatVideo" src="https://www.youtube.com/embed/Nnk6XcVUqRk" width="80%" height="250" allowfullscreen></iframe>
+  <br><img id="studioImage" src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=900&q=80" width="80%" alt="Studio">
+
+  <h3>Learn FL Studio Mobile</h3>
+  <p id="lessonSummary">Lessons prepared by <strong>MANIRAFASHA Gaston</strong> to help you become a beat maker.</p>
+  <iframe id="lessonVideo" src="https://www.youtube.com/embed/qrfpNzM6sJg" width="80%" height="250" allowfullscreen></iframe>
+  
+  <p>📍 Location: Bunyereri Village, Kiziho Cell, Nyakabuye Sector, Rusizi District</p>
+  <iframe src="https://www.google.com/maps?q=Nyakabuye,Rusizi,Rwanda&output=embed" width="80%" height="200"></iframe>
+
+  <footer>
+    <p>🎥 YouTube: <a href="https://www.youtube.com/@vaddzy" target="_blank">@vaddzy</a></p>
+    <div class="social-links">
+      🎵 TikTok: <a href="https://tiktok.com/@vaddzy7" target="_blank">@vaddzy7</a><br>
+      📷 Instagram: <a href="https://www.instagram.com/vaddzy35?igsh=a3d2dXZ5OW9ia216" target="_blank">@vaddzy35</a><br>
+      💬 WhatsApp: <a href="https://wa.me/250736421989" target="_blank">+250 736 421 989</a>
+    </div>
+  </footer>
+  
+  <button class="btn" id="loginBtn">Login/Register</button>
+</div>
+
+<!-- Visitor Dashboard -->
+<div id="visitorDashboard">
+  <p>Welcome Visitor!</p>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="adminDashboard">
+  <div class="tabs">
+    <button class="active" onclick="switchTab('profile')">Profile</button>
+    <button onclick="switchTab('content')">Content</button>
+    <button onclick="switchTab('visitors')">Visitors</button>
+    <button onclick="switchTab('settings')">Settings</button>
+  </div>
+
+  <!-- Profile -->
+  <div id="profile" class="tab-content active">
+    <h3>Edit Profile</h3>
+    <label>Name:</label><input type="text" id="adminName" value="MANIRAFASHA Gaston">
+    <label>Email:</label><input type="email" id="adminEmail" value="gastonmanirafasha46@gmail.com">
+    <label>Bio:</label><textarea id="adminBio">Producer • Songwriter • Logo Designer • Tag Maker</textarea>
+    <button class="btn" onclick="alert('Profile updated!')">Save Profile</button>
+  </div>
+
+  <!-- Content -->
+  <div id="content" class="tab-content">
+    <h3>Edit Website Content</h3>
+    <label>Welcome Text:</label><textarea id="editWelcome"></textarea>
+    <label>Beat Video (Embed URL):</label><input type="text" id="editBeat">
+    <label>Studio Image:</label><input type="file" id="editStudio" accept="image/*">
+    <label>Lesson Summary:</label><textarea id="editLessonSummary"></textarea>
+    <label>Lesson Video (Embed URL):</label><input type="text" id="editLessonVideo">
+    <button class="btn" onclick="saveChanges()">Save Content</button>
+  </div>
+
+  <!-- Visitors -->
+  <div id="visitors" class="tab-content">
+    <h3>Visitor Logs</h3>
+    <button class="btn" onclick="exportLog()">Export Log CSV</button>
+    <ul id="visitorLog"></ul>
+  </div>
+
+  <!-- Settings -->
+  <div id="settings" class="tab-content">
+    <h3>Admin Settings</h3>
+    <label>Change Password:</label><input type="password" id="newPass" placeholder="New Password">
+    <button class="btn" onclick="alert('Password updated!')">Update Password</button>
+    <hr>
+    <button class="btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div id="authModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;">
+  <div style="background:#fff; padding:20px; border-radius:12px; width:300px;">
+    <h3>Login</h3>
+    <input type="text" id="logUser" placeholder="Username">
+    <input type="password" id="logPass" placeholder="Password">
+    <button class="btn" onclick="login()">Login</button>
+    <hr>
+    <h3>Register Visitor</h3>
+    <input type="text" id="regUser" placeholder="Username">
+    <input type="password" id="regPass" placeholder="Password">
+    <button class="btn" onclick="registerVisitor()">Register</button><br><br>
+    <button onclick="document.getElementById('authModal').style.display='none';" class="btn" style="background:#ed4956;">Close</button>
+  </div>
+</div>
+
+<script>
+const ADMIN_USER="nyakabuyeadmin", ADMIN_PASS="nyak@buye2025";
+let users={}, visitorLog=[], blockedUsers=[], currentUser=null;
+
+document.getElementById("loginBtn").onclick=()=>{document.getElementById("authModal").style.display="flex";};
+
+function switchTab(tab){
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function registerVisitor(){
+  const u=document.getElementById("regUser").value.trim(),p=document.getElementById("regPass").value.trim();
+  if(!u||!p) return alert("Fill fields!");
+  if(users[u]) return alert("User exists!");
+  users[u]=p; alert("Visitor registered!");
+  logVisitor(u,"Registered");
+}
+
+function login(){
+  const u=document.getElementById("logUser").value.trim(),p=document.getElementById("logPass").value.trim();
+  if(blockedUsers.includes(u)) return alert("You are blocked.");
+  if(u===ADMIN_USER && p===ADMIN_PASS){ currentUser={role:"admin"}; showAdmin(); }
+  else if(users[u] && users[u]===p){ currentUser={role:"visitor",name:u}; logVisitor(u,"Logged In"); showVisitor(); }
+  else return alert("Invalid login!");
+  document.getElementById("authModal").style.display="none";
+}
+
+function logVisitor(u,a){visitorLog.push({user:u,action:a,time:new Date().toLocaleString()}); updateVisitorLog();}
+function updateVisitorLog(){
+  const list=document.getElementById("visitorLog"); list.innerHTML="";
+  visitorLog.forEach((l,i)=>{ list.innerHTML+=`<li>${l.user} - ${l.action} at ${l.time} <span><button onclick="deleteVisitor(${i})">Del</button><button class='block' onclick="blockVisitor('${l.user}')">Block</button></span></li>`; });
+}
+function deleteVisitor(i){visitorLog.splice(i,1); updateVisitorLog();}
+function blockVisitor(u){if(!blockedUsers.includes(u)) blockedUsers.push(u); alert(u+" blocked!");}
+function exportLog(){if(visitorLog.length===0) return alert("No log."); let csv="data:text/csv;charset=utf-8,User,Action,Time\n"; visitorLog.forEach(l=>{csv+=`${l.user},${l.action},${l.time}\n`;}); const link=document.createElement("a"); link.href=encodeURI(csv); link.download="visitor_log.csv"; document.body.appendChild(link); link.click(); document.body.removeChild(link);}
+
+function showAdmin(){
+  document.getElementById("publicContent").style.display="none";
+  document.getElementById("visitorDashboard").style.display="none";
+  document.getElementById("adminDashboard").style.display="block";
+  document.getElementById("editWelcome").value=document.getElementById("welcomeText").textContent;
+  document.getElementById("editBeat").value=document.getElementById("beatVideo").src;
+  document.getElementById("editLessonSummary").value=document.getElementById("lessonSummary").textContent;
+  document.getElementById("editLessonVideo").value=document.getElementById("lessonVideo").src;
+  updateVisitorLog();
+}
+
+function showVisitor(){
+  document.getElementById("publicContent").style.display="block";
+  document.getElementById("visitorDashboard").style.display="block";
+  document.getElementById("adminDashboard").style.display="none";
+  document.getElementById("visitorDashboard").querySelector("p").textContent=`Welcome, ${currentUser.name}!`;
+}
+
+function logout(){ currentUser=null; document.getElementById("publicContent").style.display="block"; document.getElementById("adminDashboard").style.display="none"; document.getElementById("visitorDashboard").style.display="none"; }
+
+function saveChanges(){
+  document.getElementById("welcomeText").textContent=document.getElementById("editWelcome").value;
+  document.getElementById("beatVideo").src=document.getElementById("editBeat").value;
+  document.getElementById("lessonSummary").textContent=document.getElementById("editLessonSummary").value;
+  document.getElementById("lessonVideo").src=document.getElementById("editLessonVideo").value;
+  const f=document.getElementById("editStudio").files[0];
+  if(f){const r=new FileReader(); r.onload=(e)=>document.getElementById("studioImage").src=e.target.result; r.readAsDataURL(f);}
+  alert("Content saved!");
+}
+logVisitor("Guest","Visited Site");
+</script>
+</body>
+</html>
