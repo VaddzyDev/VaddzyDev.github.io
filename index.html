@@ -3,30 +3,1054 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vaddzy</title>
-    <!-- CSS is now directly in the HTML file -->
+    <title>Vaddzy - Creative Collaboration Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AdSense Code - This loads the AdSense library for Auto ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4759102262341082"
+            crossorigin="anonymous"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            color: #333;
-            margin-top: 50px;
-        }
-
-        h1 {
-            color: #007BFF;
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col bg-gray-900 text-white">
 
-    <h1>Hello, World!</h1>
-    <p>This is my website.</p>
-    
-    <!-- JavaScript is also directly in the HTML file -->
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full bg-gray-900 border-b border-gray-700 text-white p-4 z-50 shadow-lg">
+        <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <h1 id="site-title-nav" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Vaddzy</h1>
+            <div class="flex items-center gap-4">
+                <button id="nav-home-btn" class="flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 hover:text-white hover:bg-gray-800 transition-colors duration-200">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Home</span>
+                </button>
+                <button id="nav-more-info-btn" class="flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 hover:text-white hover:bg-gray-800 transition-colors duration-200">
+                    <i data-lucide="info" class="w-4 h-4"></i>
+                    <span>More Info</span>
+                </button>
+                <button id="nav-profile-btn" class="hidden flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 hover:text-white hover:bg-gray-800 transition-colors duration-200">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    <span>My Profile</span>
+                </button>
+                <span id="user-display" class="hidden text-sm text-gray-400"></span>
+                <button id="nav-login-btn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-colors duration-200">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>Login</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="pt-20 flex-grow">
+
+        <!-- Home Page Section -->
+        <section id="home-page" class="flex flex-col items-center justify-center min-h-screen">
+            <div class="text-center p-8 bg-gray-800 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                <h1 id="site-title-home" class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">Vaddzy</h1>
+                <p id="site-tagline-home" class="text-xl md:text-2xl font-light mb-8 max-w-2xl mx-auto text-gray-300">
+                    The ultimate creative hub to connect producers, artists, songwriters, and designers. Find your perfect collaborator and bring your vision to life.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button id="home-login-btn" class="flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                        <span>Login / Register</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- More Info Page Section -->
+        <section id="more-info-page" class="hidden min-h-screen p-8">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-8">
+                    More About Vaddzy
+                </h2>
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl space-y-6 mb-8">
+                    <p class="text-gray-300">
+                        Vaddzy is a vibrant community designed to connect creative professionals from various fields. Whether you're a music producer, a visual artist, a songwriter, or a designer, our platform provides the tools and space to collaborate and bring ambitious projects to fruition.
+                    </p>
+                    <p class="text-gray-300">
+                        Our mission is to foster a collaborative environment where talent can meet opportunity. You can showcase your work, find a team for your next project, and get inspired by the incredible creations of other members.
+                    </p>
+                    <p class="text-gray-300">
+                        Join us today and become a part of a network that's shaping the future of creative industries.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login/Register Modal -->
+        <div id="auth-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-[100]">
+            <div class="bg-gray-800 rounded-2xl p-8 shadow-2xl max-w-md w-full relative">
+                <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <div id="login-form-container">
+                    <form id="combined-login-form" class="flex flex-col gap-4">
+                        <h2 class="text-3xl font-bold mb-2 text-white text-center">Login</h2>
+                        <input id="login-username" type="text" placeholder="Username" class="p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-purple-500" required>
+                        <input id="login-password" type="password" placeholder="Password" class="p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-purple-500" required>
+                        <button type="submit" class="px-8 py-4 text-lg font-semibold rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            Log In
+                        </button>
+                        <p id="login-error" class="text-red-400 text-center"></p>
+                        <p class="text-sm text-gray-400 text-center mt-2">
+                            Don't have an account? <span id="switch-to-register" class="text-purple-400 cursor-pointer hover:underline">Register here.</span>
+                        </p>
+                    </form>
+                    <form id="visitor-register-form" class="hidden flex-col gap-4">
+                        <h2 class="text-3xl font-bold mb-2 text-white text-center">Registration</h2>
+                        <input id="register-username" type="text" placeholder="Username" class="p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-purple-500" required>
+                        <input id="register-password" type="password" placeholder="Password" class="p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-purple-500" required>
+                        <button type="submit" class="px-8 py-4 text-lg font-semibold rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            Register
+                        </button>
+                        <p id="register-error" class="text-red-400 text-center"></p>
+                        <p class="text-sm text-gray-400 text-center mt-2">
+                            Already have an account? <span id="switch-to-login" class="text-purple-400 cursor-pointer hover:underline">Log in.</span>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visitor Dashboard Section -->
+        <section id="visitor-dashboard" class="hidden min-h-screen p-8">
+            <div class="max-w-7xl mx-auto">
+                <h2 id="visitor-welcome-text" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-8">
+                    Welcome, Visitor!
+                </h2>
+                
+                <!-- Global Announcements Section -->
+                <div id="announcements-container" class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2 text-yellow-400">
+                        <i data-lucide="megaphone" class="w-6 h-6"></i>
+                        <span>Global Announcements</span>
+                    </h3>
+                    <div id="announcements-list" class="space-y-4">
+                        <p class="text-gray-400">No announcements yet.</p>
+                    </div>
+                </div>
+
+                <!-- Admin Posts Section -->
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-yellow-400"></i>
+                        <span>Admin Posts</span>
+                    </h3>
+                    <div id="admin-posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <p id="admin-posts-empty" class="text-gray-400 text-center py-4 col-span-full">No new posts from the admin yet.</p>
+                    </div>
+                </div>
+
+                <!-- Upload Media Section -->
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+                        <i data-lucide="upload" class="w-6 h-6 text-purple-400"></i>
+                        <span>Upload Your Work</span>
+                    </h3>
+                    <form id="media-upload-form" class="flex flex-col md:flex-row gap-4">
+                        <input id="media-title" type="text" placeholder="Title of your work (e.g., 'My New Song')" class="flex-grow p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-purple-500" required>
+                        <select id="media-type" class="p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-purple-500">
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>
+                            <option value="audio">Audio</option>
+                        </select>
+                        <button type="submit" class="flex items-center justify-center gap-2 px-8 py-3 font-semibold rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            <span>Upload</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visitor Profile Section -->
+        <section id="visitor-profile-page" class="hidden min-h-screen p-8">
+            <div class="max-w-7xl mx-auto">
+                <h2 id="profile-welcome-text" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600 mb-8">My Profile</h2>
+                
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <div class="flex flex-col md:flex-row items-center gap-6 mb-8">
+                        <div class="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-purple-500 shadow-lg">
+                            <img id="profile-picture-display" src="https://placehold.co/200x200/52525B/FFFFFF?text=P" alt="Profile Picture" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-grow text-center md:text-left">
+                            <h3 class="text-3xl font-bold text-white mb-2" id="profile-username-display"></h3>
+                            <p class="text-gray-400 text-lg">Visitor</p>
+                            <form id="profile-pic-form" class="mt-4 flex flex-col sm:flex-row items-center gap-4">
+                                <input type="file" id="profile-pic-file" accept="image/*" class="text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
+                                <button type="submit" class="px-6 py-2 bg-purple-500 hover:bg-purple-600 rounded-full text-white font-semibold shadow-lg">Upload Picture</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-pink-400"></i>
+                        <span>My Uploads</span>
+                    </h3>
+                    <div id="my-uploads-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <p id="my-uploads-empty" class="text-gray-400 text-center py-4 col-span-full">No uploads yet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Admin Dashboard Section -->
+        <section id="admin-dashboard" class="hidden min-h-screen p-8">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500 mb-8">
+                    Admin Dashboard
+                </h2>
+
+                <!-- Social Activity Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-gray-800 rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="text-gray-400 font-semibold">Total Visitors</div>
+                            <i data-lucide="users" class="w-8 h-8 text-green-400"></i>
+                        </div>
+                        <div id="stat-users" class="text-3xl font-bold mt-2">0</div>
+                    </div>
+                    <div class="bg-gray-800 rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="text-gray-400 font-semibold">Admin Posts</div>
+                            <i data-lucide="image" class="w-8 h-8 text-teal-400"></i>
+                        </div>
+                        <div id="stat-posts" class="text-3xl font-bold mt-2">0</div>
+                    </div>
+                    <div class="bg-gray-800 rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="text-gray-400 font-semibold">Total Comments</div>
+                            <i data-lucide="message-circle" class="w-8 h-8 text-yellow-400"></i>
+                        </div>
+                        <div id="stat-comments" class="text-3xl font-bold mt-2">0</div>
+                    </div>
+                    <div class="bg-gray-800 rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="text-gray-400 font-semibold">Total Likes</div>
+                            <i data-lucide="heart" class="w-8 h-8 text-red-400"></i>
+                        </div>
+                        <div id="stat-likes" class="text-3xl font-bold mt-2">0</div>
+                    </div>
+                </div>
+
+                <!-- Announcements Section -->
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2 text-white">
+                        <i data-lucide="megaphone" class="w-6 h-6 text-yellow-400"></i>
+                        <span>Manage Announcements</span>
+                    </h3>
+                    <form id="admin-announcement-form" class="flex flex-col gap-4">
+                        <textarea id="admin-announcement-text" placeholder="Write a new global announcement..." class="p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-green-500 h-24" required></textarea>
+                        <button type="submit" class="flex items-center justify-center gap-2 px-8 py-3 font-semibold rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            <span>Post Announcement</span>
+                        </button>
+                    </form>
+                    <div id="admin-announcements-list" class="mt-8 space-y-4">
+                        <p id="admin-announcements-empty" class="text-gray-400 text-center py-4">No announcements yet.</p>
+                    </div>
+                </div>
+
+                <!-- Admin Posts Section -->
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2 text-white">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-yellow-400"></i>
+                        <span>Post New Content</span>
+                    </h3>
+                    <form id="admin-post-form" class="flex flex-col gap-4">
+                        <input id="admin-post-title" type="text" placeholder="Title for your post" class="p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-green-500" required>
+                        <input id="admin-post-file" type="file" class="p-3 rounded-xl bg-gray-700 text-white border-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" required>
+                        <button type="submit" class="flex items-center justify-center gap-2 px-8 py-3 font-semibold rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            <span>Post Content</span>
+                        </button>
+                    </form>
+                    <div id="admin-posts-list" class="mt-8 space-y-4">
+                        <p id="admin-posts-list-empty" class="text-gray-400 text-center py-4">No posts yet.</p>
+                    </div>
+                </div>
+
+                <!-- User Management -->
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2 text-white">
+                        <i data-lucide="users" class="w-6 h-6 text-green-400"></i>
+                        <span>User Management</span>
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Username</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-list-admin" class="bg-gray-700 divide-y divide-gray-600">
+                                <tr class="text-center">
+                                    <td colspan="3" class="px-6 py-4 text-gray-400">No visitors registered yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Comment Management -->
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2 text-white">
+                        <i data-lucide="message-circle" class="w-6 h-6 text-yellow-400"></i>
+                        <span>Comment Management</span>
+                    </h3>
+                    <ul id="admin-comments-list" class="space-y-4">
+                        <li class="text-gray-400 text-center py-4">No comments yet.</li>
+                    </ul>
+                </div>
+
+                <!-- Site Settings -->
+                <div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2 text-white">
+                        <i data-lucide="settings" class="w-6 h-6 text-teal-400"></i>
+                        <span>Site Settings</span>
+                    </h3>
+                    <form id="edit-site-form" class="flex flex-col gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Main Title</label>
+                            <input id="edit-title" type="text" class="w-full p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Tagline</label>
+                            <textarea id="edit-tagline" class="w-full p-3 rounded-xl bg-gray-700 text-white border-none focus:ring-2 focus:ring-green-500 h-24"></textarea>
+                        </div>
+                        <button type="submit" class="flex items-center justify-center gap-2 px-8 py-3 font-semibold rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            <span>Save Changes</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="mt-auto bg-gray-950 p-8 border-t border-gray-700 shadow-inner">
+        <div class="max-w-7xl mx-auto text-center">
+            <h3 class="text-2xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
+                Contact & Social Media
+            </h3>
+            <div class="flex justify-center flex-wrap gap-6 mb-6">
+                <a href="https://www.facebook.com/profile.php?id=61562834675406" target="_blank" class="text-gray-300 hover:text-blue-500 transition-colors duration-200 flex items-center gap-2">
+                    <i data-lucide="facebook" class="w-6 h-6"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/vaddzy35?igsh=a3d2dXZ5OW9ia216" target="_blank" class="text-gray-300 hover:text-pink-500 transition-colors duration-200 flex items-center gap-2">
+                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.youtube.com/@vaddzy" target="_blank" class="text-gray-300 hover:text-red-500 transition-colors duration-200 flex items-center gap-2">
+                    <i data-lucide="youtube" class="w-6 h-6"></i>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://tiktok.com/@vaddzy7" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200 flex items-center gap-2">
+                    <i data-lucide="tiktok" class="w-6 h-6"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="tel:+250736421989" class="text-gray-300 hover:text-green-500 transition-colors duration-200 flex items-center gap-2">
+                    <i data-lucide="phone" class="w-6 h-6"></i>
+                    <span>WhatsApp: +250 736 421 989</span>
+                </a>
+            </div>
+            
+            <!-- Moved Logout Button to Footer -->
+            <div class="mt-8">
+                <button id="nav-logout-btn" class="hidden flex items-center justify-center mx-auto gap-2 px-6 py-2 rounded-full bg-red-600 text-white font-bold shadow-lg border-2 border-red-700 hover:bg-red-700 transition-all duration-300">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+            <p class="text-gray-400 mt-4">&copy; 2025 Vaddzy. All rights reserved.</p>
+            <!-- Developer Credit -->
+            <p class="text-gray-400 text-sm mt-1">Developed by MANIRAFASHA Gaston</p>
+        </div>
+    </footer>
+
     <script>
-        console.log("The website is working correctly!");
+        // --- MOCK DATABASE AND STATE MANAGEMENT ---
+        // This is an in-memory database. Data will be lost when the page is reloaded.
+        const DB = {
+            users: [],
+            media: [],
+            adminPosts: [],
+            comments: [],
+            likes: [],
+            announcements: [],
+            siteConfig: {
+                title: "Vaddzy",
+                tagline: "The ultimate creative hub to connect producers, artists, songwriters, and designers. Find your perfect collaborator and bring your vision to life."
+            }
+        };
+
+        const ADMIN_CREDENTIALS = {
+            username: 'Gaston',
+            password: 'display80'
+        };
+        const ADMIN_PROFILE_PIC_URL = "https://placehold.co/150x150/52525B/FFFFFF?text=Admin";
+
+
+        let appState = {
+            user: null, // { uid: string, username: string, role: string, isBanned: boolean, profilePicUrl: string }
+            currentView: 'home' // 'home', 'more-info', 'visitor', 'profile', 'admin'
+        };
+
+        // --- UI ELEMENT REFERENCES ---
+        const homePage = document.getElementById('home-page');
+        const moreInfoPage = document.getElementById('more-info-page');
+        const visitorDashboard = document.getElementById('visitor-dashboard');
+        const visitorProfilePage = document.getElementById('visitor-profile-page');
+        const adminDashboard = document.getElementById('admin-dashboard');
+
+        const navLoginBtn = document.getElementById('nav-login-btn');
+        const navLogoutBtn = document.getElementById('nav-logout-btn');
+        const navProfileBtn = document.getElementById('nav-profile-btn');
+        const navMoreInfoBtn = document.getElementById('nav-more-info-btn');
+        const userDisplay = document.getElementById('user-display');
+        const homeLoginBtn = document.getElementById('home-login-btn');
+        const navHomeBtn = document.getElementById('nav-home-btn');
+
+        const authModal = document.getElementById('auth-modal');
+        const closeAuthModalBtn = document.getElementById('close-modal-btn');
+        const combinedLoginForm = document.getElementById('combined-login-form');
+        const visitorRegisterForm = document.getElementById('visitor-register-form');
+        const switchToRegisterBtn = document.getElementById('switch-to-register');
+        const switchToLoginBtn = document.getElementById('switch-to-login');
+        const loginErrorDisplay = document.getElementById('login-error');
+        const registerErrorDisplay = document.getElementById('register-error');
+
+        const profilePictureDisplay = document.getElementById('profile-picture-display');
+        const profileUsernameDisplay = document.getElementById('profile-username-display');
+        const profilePicForm = document.getElementById('profile-pic-form');
+        const announcementsList = document.getElementById('announcements-list');
+        const myUploadsContainer = document.getElementById('my-uploads-container');
+        const mediaUploadForm = document.getElementById('media-upload-form');
+        const adminPostForm = document.getElementById('admin-post-form');
+        const adminPostsContainer = document.getElementById('admin-posts-container');
+        const adminPostsEmpty = document.getElementById('admin-posts-empty');
+        const adminPostsList = document.getElementById('admin-posts-list');
+        const userListAdmin = document.getElementById('user-list-admin');
+        const editSiteForm = document.getElementById('edit-site-form');
+        const adminCommentsList = document.getElementById('admin-comments-list');
+        const adminAnnouncementForm = document.getElementById('admin-announcement-form');
+        const adminAnnouncementsList = document.getElementById('admin-announcements-list');
+
+        const siteTitleNav = document.getElementById('site-title-nav');
+        const siteTitleHome = document.getElementById('site-title-home');
+        const siteTaglineHome = document.getElementById('site-tagline-home');
+        const editTitleInput = document.getElementById('edit-title');
+        const editTaglineInput = document.getElementById('edit-tagline');
+
+        const visitorWelcomeText = document.getElementById('visitor-welcome-text');
+        const profileWelcomeText = document.getElementById('profile-welcome-text');
+        
+        const statUsers = document.getElementById('stat-users');
+        const statPosts = document.getElementById('stat-posts');
+        const statComments = document.getElementById('stat-comments');
+        const statLikes = document.getElementById('stat-likes');
+
+        // --- UI RENDERING FUNCTIONS ---
+        function renderUI() {
+            // Hide all sections first
+            homePage.classList.add('hidden');
+            moreInfoPage.classList.add('hidden');
+            visitorDashboard.classList.add('hidden');
+            visitorProfilePage.classList.add('hidden');
+            adminDashboard.classList.add('hidden');
+            authModal.classList.add('hidden');
+
+            // Show the correct section
+            if (appState.currentView === 'home') {
+                homePage.classList.remove('hidden');
+            } else if (appState.currentView === 'more-info') {
+                moreInfoPage.classList.remove('hidden');
+            } else if (appState.currentView === 'visitor') {
+                visitorDashboard.classList.remove('hidden');
+                renderVisitorDashboard();
+            } else if (appState.currentView === 'profile') {
+                visitorProfilePage.classList.remove('hidden');
+                renderVisitorProfile();
+            } else if (appState.currentView === 'admin') {
+                adminDashboard.classList.remove('hidden');
+                renderAdminDashboard();
+            }
+
+            // Update nav buttons and user info
+            if (appState.user) {
+                navLoginBtn.classList.add('hidden');
+                navLogoutBtn.classList.remove('hidden'); // Show logout button in footer
+                userDisplay.classList.remove('hidden');
+                userDisplay.textContent = appState.user.username; // Display the username
+                if (appState.user.role === 'visitor') {
+                    navProfileBtn.classList.remove('hidden');
+                } else {
+                    navProfileBtn.classList.add('hidden');
+                }
+            } else {
+                navLoginBtn.classList.remove('hidden');
+                navLogoutBtn.classList.add('hidden'); // Hide logout button in footer
+                userDisplay.classList.add('hidden');
+                navProfileBtn.classList.add('hidden');
+            }
+            
+            // Update site content
+            siteTitleNav.textContent = DB.siteConfig.title;
+            siteTitleHome.textContent = DB.siteConfig.title;
+            siteTaglineHome.textContent = DB.siteConfig.tagline;
+            if (editTitleInput) editTitleInput.value = DB.siteConfig.title;
+            if (editTaglineInput) editTaglineInput.value = DB.siteConfig.tagline;
+
+            // Ensure Lucide icons are rendered
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        function renderVisitorDashboard() {
+            if (!appState.user) return;
+            visitorWelcomeText.textContent = `Welcome, ${appState.user.username}!`; // Use username
+            renderAnnouncements();
+            renderAdminPosts();
+        }
+
+        function renderVisitorProfile() {
+            if (!appState.user) return;
+            profileWelcomeText.textContent = `My Profile: ${appState.user.username}`;
+            profileUsernameDisplay.textContent = appState.user.username;
+            
+            // Render profile picture
+            profilePictureDisplay.src = appState.user.profilePicUrl || `https://placehold.co/200x200/52525B/FFFFFF?text=${appState.user.username.charAt(0)}`;
+            
+            // Render Visitor's Own Uploads
+            myUploadsContainer.innerHTML = '';
+            const userMedia = DB.media.filter(item => item.uid === appState.user.uid);
+            if (userMedia.length === 0) {
+                myUploadsContainer.innerHTML = '<p id="my-uploads-empty" class="text-gray-400 text-center py-4 col-span-full">No uploads yet.</p>';
+            } else {
+                userMedia.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-gray-700 rounded-xl shadow-lg overflow-hidden';
+                    
+                    let mediaElement;
+                    if (item.type === 'image') {
+                        mediaElement = `<img src="${item.url}" alt="${item.title}" class="w-full h-48 object-cover">`;
+                    } else if (item.type === 'video') {
+                        mediaElement = `<video src="${item.url}" controls class="w-full h-48 object-cover"></video>`;
+                    } else if (item.type === 'audio') {
+                        mediaElement = `<div class="p-4 flex items-center justify-center h-48 bg-gray-800">
+                                            <audio src="${item.url}" controls class="w-full"></audio>
+                                        </div>`;
+                    }
+
+                    card.innerHTML = `
+                        ${mediaElement}
+                        <div class="p-4">
+                            <h4 class="text-xl font-bold text-white mb-2">${item.title}</h4>
+                            <button data-id="${item.id}" class="remove-media-btn inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors duration-200">
+                                <i data-lucide="trash" class="w-4 h-4"></i>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    `;
+                    myUploadsContainer.appendChild(card);
+                });
+
+                myUploadsContainer.querySelectorAll('.remove-media-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const mediaId = parseInt(e.target.getAttribute('data-id'));
+                        DB.media = DB.media.filter(item => item.id !== mediaId);
+                        renderUI();
+                    });
+                });
+            }
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        function renderAnnouncements() {
+            announcementsList.innerHTML = '';
+            if (DB.announcements.length === 0) {
+                announcementsList.innerHTML = '<p class="text-gray-400">No announcements yet.</p>';
+            } else {
+                DB.announcements.forEach(announcement => {
+                    const item = document.createElement('div');
+                    item.className = 'bg-gray-700 p-4 rounded-xl shadow-md text-gray-300';
+                    item.innerHTML = `
+                        <p class="font-semibold text-white mb-1">New Announcement</p>
+                        <p>${announcement.text}</p>
+                    `;
+                    announcementsList.appendChild(item);
+                });
+            }
+        }
+
+        function renderAdminPosts() {
+            // Render Admin Posts
+            adminPostsContainer.innerHTML = '';
+            if (DB.adminPosts.length === 0) {
+                adminPostsContainer.innerHTML = '<p id="admin-posts-empty" class="text-gray-400 text-center py-4 col-span-full">No new posts from the admin yet.</p>';
+            } else {
+                DB.adminPosts.forEach(post => {
+                    const likeCount = DB.likes.filter(l => l.postId === post.id).length;
+                    const isLiked = appState.user ? DB.likes.some(l => l.postId === post.id && l.userId === appState.user.uid) : false;
+                    const likeButtonClass = isLiked ? 'text-red-400' : 'text-gray-400';
+
+                    const card = document.createElement('div');
+                    card.className = 'bg-gray-700 rounded-2xl shadow-lg overflow-hidden flex flex-col';
+                    
+                    let mediaElement;
+                    if (post.type === 'image') {
+                        mediaElement = `<img src="${post.url}" alt="${post.title}" class="w-full h-48 object-cover">`;
+                    } else if (post.type === 'video') {
+                        mediaElement = `<video src="${post.url}" controls class="w-full h-48 object-cover"></video>`;
+                    } else if (post.type === 'audio') {
+                        mediaElement = `<div class="p-4 flex items-center justify-center h-48 bg-gray-800">
+                                            <audio src="${post.url}" controls class="w-full"></audio>
+                                        </div>`;
+                    }
+
+                    const postComments = DB.comments.filter(c => c.postId === post.id);
+                    const commentsHtml = postComments.map(comment => `
+                        <div class="bg-gray-600 p-2 rounded-xl text-sm mb-2">
+                            <div class="flex items-center gap-2 mb-1">
+                                <img src="${DB.users.find(u => u.uid === comment.userId)?.profilePicUrl || `https://placehold.co/30x30/52525B/FFFFFF?text=${comment.username.charAt(0)}`}" alt="${comment.username}" class="w-6 h-6 rounded-full object-cover">
+                                <span class="font-bold text-white">${comment.username}:</span>
+                            </div>
+                            <p class="text-gray-300 ml-8">${comment.text}</p>
+                        </div>
+                    `).join('');
+
+                    card.innerHTML = `
+                        ${mediaElement}
+                        <div class="p-4 flex-grow">
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="${ADMIN_PROFILE_PIC_URL}" alt="Admin Profile" class="w-10 h-10 rounded-full object-cover">
+                                <div>
+                                    <h4 class="text-xl font-bold text-white">${post.title}</h4>
+                                    <p class="text-sm text-gray-400">by ${ADMIN_CREDENTIALS.username}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <a href="${post.url}" download="${post.filename}" class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-purple-600 hover:bg-purple-700 text-white transition-colors duration-200">
+                                    <i data-lucide="download" class="w-4 h-4"></i>
+                                    <span>Download</span>
+                                </a>
+                                <div class="flex items-center gap-2">
+                                    <button class="like-button" data-post-id="${post.id}">
+                                        <i data-lucide="heart" class="w-5 h-5 ${likeButtonClass}"></i>
+                                    </button>
+                                    <span class="text-gray-400">${likeCount}</span>
+                                </div>
+                            </div>
+                            <div class="comments-section mt-4">
+                                <h5 class="text-md font-semibold text-gray-300 mb-2">Comments:</h5>
+                                <div class="space-y-2 mb-4">
+                                    ${commentsHtml || '<p class="text-sm text-gray-400">No comments yet.</p>'}
+                                </div>
+                                <form class="comment-form flex gap-2" data-post-id="${post.id}">
+                                    <input type="text" placeholder="Add a comment..." class="flex-grow p-2 rounded-xl bg-gray-600 text-white border-none text-sm focus:ring-2 focus:ring-purple-500" required>
+                                    <button type="submit" class="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-full text-white text-sm font-semibold">Post</button>
+                                </form>
+                            </div>
+                        </div>
+                    `;
+                    adminPostsContainer.appendChild(card);
+                });
+                
+                adminPostsContainer.querySelectorAll('.comment-form').forEach(form => {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        if (!appState.user) {
+                           alert('Please log in to comment.');
+                           return;
+                        }
+                        const postId = parseInt(e.target.getAttribute('data-post-id'));
+                        const commentText = e.target.querySelector('input').value;
+                        if (commentText.trim()) {
+                            const newComment = {
+                                id: DB.comments.length + 1,
+                                postId,
+                                userId: appState.user.uid,
+                                username: appState.user.username,
+                                text: commentText,
+                                timestamp: new Date().toISOString()
+                            };
+                            DB.comments.push(newComment);
+                            e.target.reset();
+                            renderUI();
+                        }
+                    });
+                });
+
+                adminPostsContainer.querySelectorAll('.like-button').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        if (!appState.user) {
+                            alert('Please log in to like a post.');
+                            return;
+                        }
+                        const postId = parseInt(e.currentTarget.getAttribute('data-post-id'));
+                        const existingLikeIndex = DB.likes.findIndex(l => l.postId === postId && l.userId === appState.user.uid);
+                        if (existingLikeIndex > -1) {
+                            DB.likes.splice(existingLikeIndex, 1);
+                        } else {
+                            DB.likes.push({ postId, userId: appState.user.uid });
+                        }
+                        renderUI();
+                    });
+                });
+
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            }
+        }
+
+        function renderAdminDashboard() {
+            // Update social stats
+            statUsers.textContent = DB.users.length;
+            statPosts.textContent = DB.adminPosts.length;
+            statComments.textContent = DB.comments.length;
+            statLikes.textContent = DB.likes.length;
+
+            // Render Admin Announcements List
+            adminAnnouncementsList.innerHTML = '';
+            if (DB.announcements.length === 0) {
+                 adminAnnouncementsList.innerHTML = '<p id="admin-announcements-empty" class="text-gray-400 text-center py-4">No announcements yet.</p>';
+            } else {
+                DB.announcements.forEach(announcement => {
+                    const item = document.createElement('div');
+                    item.className = 'bg-gray-700 p-4 rounded-xl flex justify-between items-center';
+                    item.innerHTML = `
+                        <p class="text-gray-300 text-sm font-semibold">${announcement.text}</p>
+                        <button data-id="${announcement.id}" class="remove-announcement-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            Remove
+                        </button>
+                    `;
+                    adminAnnouncementsList.appendChild(item);
+                });
+                adminAnnouncementsList.querySelectorAll('.remove-announcement-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const announcementId = parseInt(e.target.getAttribute('data-id'));
+                        DB.announcements = DB.announcements.filter(a => a.id !== announcementId);
+                        renderUI();
+                    });
+                });
+            }
+
+            // Render Admin Posts List
+            adminPostsList.innerHTML = '';
+            if (DB.adminPosts.length === 0) {
+                 adminPostsList.innerHTML = '<p id="admin-posts-list-empty" class="text-gray-400 text-center py-4">No posts yet.</p>';
+            } else {
+                DB.adminPosts.forEach(post => {
+                    const postItem = document.createElement('div');
+                    postItem.className = 'bg-gray-700 p-4 rounded-xl flex items-center justify-between';
+                    postItem.innerHTML = `
+                        <div>
+                            <p class="font-bold text-lg text-white">${post.title}</p>
+                            <p class="text-sm text-gray-400">Type: ${post.type}</p>
+                        </div>
+                        <button data-id="${post.id}" class="remove-admin-post-btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200">
+                            Remove
+                        </button>
+                    `;
+                    adminPostsList.appendChild(postItem);
+                });
+
+                adminPostsList.querySelectorAll('.remove-admin-post-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const postId = parseInt(e.target.getAttribute('data-id'));
+                        DB.adminPosts = DB.adminPosts.filter(p => p.id !== postId);
+                        DB.comments = DB.comments.filter(c => c.postId !== postId); // Remove associated comments
+                        DB.likes = DB.likes.filter(l => l.postId !== postId); // Remove associated likes
+                        renderUI();
+                    });
+                });
+            }
+
+            // Render User Management
+            userListAdmin.innerHTML = '';
+            const allVisitors = DB.users.filter(u => u.role === 'visitor');
+            if (allVisitors.length === 0) {
+                 userListAdmin.innerHTML = '<tr class="text-center"><td colspan="3" class="px-6 py-4 text-gray-400">No visitors registered yet.</td></tr>';
+            } else {
+                allVisitors.forEach(user => {
+                    const banButtonText = user.isBanned ? 'Unban' : 'Ban';
+                    const banButtonColor = user.isBanned ? 'bg-green-500 hover:bg-green-600' : 'bg-yellow-500 hover:bg-yellow-600';
+                    const userStatus = user.isBanned ? '<span class="text-red-400 font-bold">Banned</span>' : '<span class="text-green-400">Active</span>';
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-gray-600 transition-colors';
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 text-sm font-medium text-white">${user.username}</td>
+                        <td class="px-6 py-4 text-sm">${userStatus}</td>
+                        <td class="px-6 py-4 text-sm font-medium flex gap-2">
+                            <button data-uid="${user.uid}" class="toggle-ban-btn text-white px-3 py-1 rounded-full text-xs font-semibold ${banButtonColor}">
+                                ${banButtonText}
+                            </button>
+                            <button data-uid="${user.uid}" class="remove-user-btn text-red-400 hover:text-red-300 transition-colors">
+                                <i data-lucide="trash" class="w-4 h-4 inline-block mr-1"></i>
+                                Remove
+                            </button>
+                        </td>
+                    `;
+                    userListAdmin.appendChild(tr);
+                });
+            }
+            userListAdmin.querySelectorAll('.remove-user-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const userId = e.target.getAttribute('data-uid');
+                    DB.users = DB.users.filter(u => u.uid !== userId);
+                    DB.media = DB.media.filter(m => m.uid !== userId); 
+                    DB.comments = DB.comments.filter(c => c.userId !== userId);
+                    DB.likes = DB.likes.filter(l => l.userId !== userId);
+                    renderUI();
+                });
+            });
+
+            userListAdmin.querySelectorAll('.toggle-ban-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const userId = e.target.getAttribute('data-uid');
+                    const user = DB.users.find(u => u.uid === userId);
+                    if (user) {
+                        user.isBanned = !user.isBanned;
+                    }
+                    renderUI();
+                });
+            });
+
+            // Render Comment Management
+            adminCommentsList.innerHTML = '';
+            if (DB.comments.length === 0) {
+                adminCommentsList.innerHTML = '<li class="text-gray-400 text-center py-4">No comments yet.</li>';
+            } else {
+                DB.comments.forEach(comment => {
+                    const post = DB.adminPosts.find(p => p.id === comment.postId);
+                    const postTitle = post ? post.title : 'Deleted Post';
+                    const commentItem = document.createElement('li');
+                    commentItem.className = 'bg-gray-700 p-4 rounded-xl flex justify-between items-start';
+                    commentItem.innerHTML = `
+                        <div>
+                            <p class="font-semibold text-white">${comment.username} on "${postTitle}":</p>
+                            <p class="text-gray-300 text-sm mt-1">${comment.text}</p>
+                        </div>
+                        <button data-id="${comment.id}" class="remove-comment-btn ml-4 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold transition-colors duration-200">
+                            Delete
+                        </button>
+                    `;
+                    adminCommentsList.appendChild(commentItem);
+                });
+                
+                adminCommentsList.querySelectorAll('.remove-comment-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const commentId = parseInt(e.target.getAttribute('data-id'));
+                        DB.comments = DB.comments.filter(c => c.id !== commentId);
+                        renderUI();
+                    });
+                });
+            }
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        // --- EVENT HANDLERS ---
+        navHomeBtn.addEventListener('click', () => {
+            appState.currentView = 'home';
+            renderUI();
+        });
+
+        navMoreInfoBtn.addEventListener('click', () => {
+            appState.currentView = 'more-info';
+            renderUI();
+        });
+
+        navLoginBtn.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+        });
+
+        navProfileBtn.addEventListener('click', () => {
+            appState.currentView = 'profile';
+            renderUI();
+        });
+
+        navLogoutBtn.addEventListener('click', () => {
+            appState.user = null;
+            appState.currentView = 'home';
+            renderUI();
+        });
+        
+        homeLoginBtn.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+        });
+
+        closeAuthModalBtn.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+            loginErrorDisplay.textContent = '';
+            registerErrorDisplay.textContent = '';
+            // Reset to login view on close
+            combinedLoginForm.classList.remove('hidden');
+            visitorRegisterForm.classList.add('hidden');
+        });
+
+        switchToRegisterBtn.addEventListener('click', () => {
+            combinedLoginForm.classList.add('hidden');
+            visitorRegisterForm.classList.remove('hidden');
+        });
+
+        switchToLoginBtn.addEventListener('click', () => {
+            combinedLoginForm.classList.remove('hidden');
+            visitorRegisterForm.classList.add('hidden');
+        });
+
+        combinedLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = e.target.querySelector('#login-username').value;
+            const password = e.target.querySelector('#login-password').value;
+
+            // Check for admin login first
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                appState.user = { uid: 'admin', username: 'Gaston', role: 'admin', isBanned: false, profilePicUrl: ADMIN_PROFILE_PIC_URL };
+                appState.currentView = 'admin';
+                renderUI();
+                return;
+            }
+
+            // Check for visitor login
+            const user = DB.users.find(u => u.username === username && u.password === password);
+            if (user) {
+                if (user.isBanned) {
+                    loginErrorDisplay.textContent = 'This account has been banned.';
+                } else {
+                    appState.user = user;
+                    appState.currentView = 'visitor';
+                    renderUI();
+                }
+            } else {
+                loginErrorDisplay.textContent = 'Invalid credentials. Please try again.';
+            }
+        });
+
+        visitorRegisterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = e.target.querySelector('#register-username').value;
+            const password = e.target.querySelector('#register-password').value;
+            const userExists = DB.users.some(u => u.username === username);
+            if (userExists) {
+                registerErrorDisplay.textContent = 'Username already registered.';
+            } else {
+                const newUser = {
+                    uid: 'vaddzy-' + Math.random().toString(36).substr(2, 9),
+                    username,
+                    password,
+                    role: 'visitor',
+                    isBanned: false,
+                    profilePicUrl: `https://placehold.co/200x200/52525B/FFFFFF?text=${username.charAt(0)}`
+                };
+                DB.users.push(newUser);
+                appState.user = newUser;
+                appState.currentView = 'profile';
+                renderUI();
+            }
+        });
+        
+        mediaUploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!appState.user) return;
+            const title = e.target.querySelector('#media-title').value;
+            const type = e.target.querySelector('#media-type').value;
+            const newMedia = {
+                id: DB.media.length + 1,
+                uid: appState.user.uid,
+                title,
+                type,
+                url: `https://placehold.co/400x200/52525B/FFFFFF?text=${encodeURIComponent(title)}`,
+                timestamp: new Date().toISOString()
+            };
+            DB.media.push(newMedia);
+            e.target.reset(); // Clear the form
+            renderUI();
+        });
+
+        adminPostForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = e.target.querySelector('#admin-post-title').value;
+            const fileInput = e.target.querySelector('#admin-post-file');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+
+            const fileType = file.type.split('/')[0]; // image, video, audio
+            const postId = DB.adminPosts.length + 1;
+            const filename = file.name;
+            const fileUrl = URL.createObjectURL(file); // Create a temporary URL
+
+            const newPost = {
+                id: postId,
+                title,
+                type: fileType,
+                filename,
+                url: fileUrl,
+                timestamp: new Date().toISOString()
+            };
+            DB.adminPosts.push(newPost);
+            e.target.reset();
+            renderUI();
+        });
+
+        adminAnnouncementForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = e.target.querySelector('#admin-announcement-text').value;
+            if (text.trim()) {
+                DB.announcements.push({
+                    id: DB.announcements.length + 1,
+                    text: text,
+                    timestamp: new Date().toISOString()
+                });
+                e.target.reset();
+                renderUI();
+            }
+        });
+
+        editSiteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            DB.siteConfig.title = editTitleInput.value;
+            DB.siteConfig.tagline = editTaglineInput.value;
+            renderUI();
+        });
+
+        profilePicForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!appState.user) return;
+            const fileInput = document.getElementById('profile-pic-file');
+            const file = fileInput.files[0];
+            if (file) {
+                appState.user.profilePicUrl = URL.createObjectURL(file);
+                renderUI();
+            }
+        });
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderUI();
+        });
     </script>
 </body>
 </html>
