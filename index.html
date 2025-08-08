@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- The title of your website has been updated to "vaddzy" -->
     <title>vaddzy</title>
-    <!-- This line tells the browser to load your CSS file for styling. -->
-    <link rel="stylesheet" href="style.css">
+    <!-- CSS is now directly in the HTML file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #007BFF;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- This is the main heading of your website. -->
     <h1>Hello, World!</h1>
-    
-    <!-- This is a simple paragraph of text. -->
     <p>This is my website.</p>
     
-    <!-- This line tells the browser to load and run your JavaScript code. -->
-    <script src="App.js"></script>
+    <!-- JavaScript is also directly in the HTML file -->
+    <script>
+        console.log("The website is working correctly!");
+    </script>
 </body>
 </html>
